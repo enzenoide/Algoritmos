@@ -28,6 +28,7 @@ vector<vector<int>> subsets(vector<int> nums){
     vector<int> subset;
 
     dfs(0,nums,subset,res);
+    cout << "UHU!";
     return res;
 }
 
