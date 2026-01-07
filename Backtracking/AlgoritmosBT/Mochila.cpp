@@ -29,6 +29,7 @@ int main(){
     }
     double valor = mochila(itens, n-1, peso_maximo);
     cout << "Valor final: " << valor << endl;
+    cout << "UHU!";
     return 0;
 }
 

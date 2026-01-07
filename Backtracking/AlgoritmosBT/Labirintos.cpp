@@ -101,6 +101,6 @@ int main(){
 
     int qtd_caminhos = labirinto_qtd_caminhos(labirinto,linha,coluna,0,0);
     std::cout << "Quantidade de caminhos encontrados: " << qtd_caminhos << std::endl;
-
+    cout << "UHU!";
     return 0;
 }
