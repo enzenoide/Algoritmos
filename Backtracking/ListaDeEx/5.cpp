@@ -1,25 +1,40 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
-int labirinto_bt(vector<vector<int>> &labirinto, int l_inicial, int c_inicial,int l_final,int c_final,int &maior_d, int d_atual){
+int const NUMERO_GRANDE = 100000000;
+int labirinto_bt(vector<vector<int>> &labirinto,int li, int ci,int lf,int cf){
     int linha = labirinto.size();
     int coluna = labirinto[0].size();
-    if(l_inicial < 0 || c_inicial < 0 || l_inicial >= linha ||c_inicial >= coluna || labirinto[l_inicial][c_inicial] != 0){
-        return false;
+    if(li < 0 || ci < 0 || li >= linha || ci >= coluna || labirinto[li][ci] == -1 || labirinto[li][ci] == -2){
+        return NUMERO_GRANDE; /* porque não 0? Porque quando encontrar um caminho sem saída e retornar 0 o melhor caminho la embaixo vai retornar 0, mas 0 não é o melhor caminho, é um caminho sem saída*/
+                             
     }
-    if(l_inicial == l_final && c_inicial == c_final){
-        return true;
+    if(li == lf && ci == cf){
+        return labirinto[li][ci];
     }
-    labirinto[l_inicial][c_inicial] = 9;
+    int dificuldade_atual = labirinto[li][ci];
+    labirinto[li][ci] = -2;
 
-    bool ans = 
-    labirinto_bt(labirinto,l_inicial + 1,c_inicial,l_final,c_final)||
-    labirinto_bt(labirinto,l_inicial,c_inicial + 1,l_final,c_final)||
-    labirinto_bt(labirinto,l_inicial - 1,c_inicial,l_final,c_final)||
-    labirinto_bt(labirinto,l_inicial,c_inicial - 1,l_final,c_final);
+    int baixo = labirinto_bt(labirinto,li+1,ci,lf,cf);
+    int direita = labirinto_bt(labirinto,li,ci+1,lf,cf);
+    int cima = labirinto_bt(labirinto,li-1,ci,lf,cf);
+    int esquerda = labirinto_bt(labirinto,li,ci-1,lf,cf);
 
-    return ans;
+    labirinto[li][ci] = dificuldade_atual;
+
+    int melhor_caminho = min({baixo,direita,cima,esquerda});
+
+    if(melhor_caminho >= NUMERO_GRANDE){
+        return NUMERO_GRANDE;
+    }
+    return dificuldade_atual + melhor_caminho;
+
+
+    
+
 }
+
 int main(){
     int l,c,lf,cf,li,ci;
     cin >> l >> c;
@@ -31,7 +46,13 @@ int main(){
             cin >> labirinto[i][j];
         }
     }
-    bool result = labirinto_bt(labirinto,li,ci,lf,cf);
-    cout << result << endl;
+    int melhor_caminho = labirinto_bt(labirinto,li,ci,lf,cf);
+
+    if(melhor_caminho >= NUMERO_GRANDE){
+        cout << -1 << endl;
+    }
+    else{
+        cout << melhor_caminho << endl;
+    }
     return 0;
 }
