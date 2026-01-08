@@ -1,5 +1,5 @@
 #include <iostream>
-
+using namespace std;
 bool labirinto_bt1(int labirinto[20][20], int linha, int coluna, int l , int c){
     if(l < 0 || c < 0 || l >= linha || c >= coluna || labirinto[l][c] == 1){
         return false; /*Rejeita*/
