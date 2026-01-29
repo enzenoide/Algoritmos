@@ -2,7 +2,15 @@
 
 /* TODO: Implementar função */
 bool ordenado(int a[],  unsigned int t){
-    return false;
+    if(t == 1){
+      return true;
+  }
+    for(int i = 0; i <= t - 2; ++i){
+      if(a[i] > a[i+1]){
+        return false;
+    }
+  }
+    return true;
 }
 
 /* TODO: Implementar função */
