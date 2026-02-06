@@ -30,5 +30,7 @@ void insercao(int a[], unsigned int t);
   A ordenação é feita diretamente no vetor 'a'
 */
 void merge_sort(int a[], unsigned int t);
+void merge(int a[],int l1,int j1,int i2,int j2);
+void merge_sort_rec(int a[],int primeiro,int ultimo);
 
 #endif
